@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Linux Task 03 Answers</title>
+<style>
+body { font-family: Arial, sans-serif; line-height: 1.6; margin: 40px auto; max-width: 800px; padding: 20px; color: #333; }
+h1, h2 { color: #0056b3; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
+code { background-color: #f4f4f4; padding: 2px 5px; border-radius: 4px; font-family: Consolas, monospace; }
+pre { background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; }
+pre code { background-color: transparent; padding: 0; }
+</style>
+</head>
+<body>
+<h1>Linux Task 03: Process Management, System Monitoring & Basic Shell Scripting</h1><br><br>Here are the solutions, explanations, and necessary scripts for the tasks outlined in your assignment. Since you are using Windows, you can either run these commands in a Linux environment (like WSL - Windows Subsystem for Linux, an Ubuntu VM, or a dedicated Linux machine) or use these provided answers directly for your assignment submission.<br><br><hr><br><br><h2>Part A: Process Monitoring</h2><br><br>When you run commands like <code>ps</code>, <code>ps aux</code>, <code>top</code>, and <code>htop</code>, you are interacting with process monitoring tools. <br><br><strong>Answers:</strong><br><br>1. **What is a Process?**
+   A process is an instance of a running computer program. When you execute a command or start an application in Linux, the kernel creates a process to track its execution state, memory allocation, and resource usage.<br><br>2. **What is a PID?**
+   A PID (Process ID) is a unique numerical identifier assigned to each running process by the operating system kernel. PIDs are used by commands (like <code>kill</code> or <code>top</code>) to specify which process to manipulate.<br><br>3. **Which process is consuming the most CPU?**
+   *To find this: Run <code>top</code> or <code>htop</code>. By default, processes are sorted by CPU usage. The process at the very top of the list is consuming the most CPU.*<br><br>4. **Which process is consuming the most Memory?**
+   *To find this: In <code>top</code>, press <code>Shift + M</code> to sort the list by memory usage. In <code>htop</code>, you can click on the <code>MEM%</code> column header to sort by memory. The process at the top will be the one consuming the most RAM.*<br><br><hr><br><br><h2>Part B: Process Management</h2><br><br><strong>Steps:</strong>
+1. Open a new terminal and run: <code>sleep 300</code> (This creates a process that simply waits for 300 seconds).
+2. Open another terminal and find the process using: <code>ps aux | grep sleep</code>
+3. You will see an output showing the <code>sleep</code> process and its PID (e.g., <code>12345</code>).<br><br><strong>Documentation:</strong><br><br><li>**PID found:** *(Example: 12345)* - *Note: You'll need to use the actual PID shown in your terminal.*</li>
+<li>**Command used:** <code>kill 12345</code> (or <code>kill -9 12345</code> for a forceful termination).</li>
+<li>**Result:** The process is terminated. If you used <code>kill</code>, it sends a <code>SIGTERM</code> signal asking the process to gracefully exit. If you used <code>kill -9</code>, it sends a <code>SIGKILL</code> signal, instantly destroying the process.</li><br><br><hr><br><br><h2>Part C: System Monitoring</h2><br><br>When you run <code>free -h</code>, <code>df -h</code>, <code>uptime</code>, and <code>uname -a</code>, you gather system information.<br><br><strong>Record (Example Output):</strong><br><br><li>**Total RAM:** *Look at the <code>total</code> column in the <code>Mem:</code> row from <code>free -h</code>.* (e.g., <code>15Gi</code>)</li>
+<li>**Available RAM:** *Look at the <code>available</code> column in the <code>Mem:</code> row from <code>free -h</code>.* (e.g., <code>8.2Gi</code>)</li>
+<li>**Disk Usage:** *Look at the <code>Use%</code> and <code>Avail</code> columns for the root <code>/</code> filesystem from <code>df -h</code>.* (e.g., <code>45% used</code>)</li>
+<li>**System Uptime:** *From the <code>uptime</code> command.* (e.g., <code>up 2 days, 4:15</code>)</li>
+<li>**Kernel Version:** *From <code>uname -a</code>.* (e.g., <code>Linux ubuntu 5.15.0-76-generic</code>)</li><br><br><strong>Simple System Summary Report:</strong>
+<pre><code>SYSTEM SUMMARY REPORT
+<hr>------------------
+Kernel Version: Linux ubuntu 5.15.0-76-generic
+System Uptime: up 2 days, 4:15
+Total Memory: 15 GiB
+Available Memory: 8.2 GiB
+Root Disk Usage: 45% Used
+</code></pre><br><br><hr><br><br><h2>Part D: Service Monitoring</h2><br><br><strong>Answers:</strong><br><br>1. **What is a Service?**
+   A service (also known as a daemon in Linux) is a background process that runs continuously, waiting to perform specific tasks or handle requests. Examples include web servers, SSH servers, and networking managers.<br><br>2. **Why are services important?**
+   They provide essential functionality without requiring manual user intervention. They run independently of user sessions, ensuring that core system functions (like networking, scheduling, or remote access) are always available.<br><br>3. **How can a stopped service affect a system?**
+   Stopping a service breaks the functionality it provides. For example, if <code>NetworkManager</code> is stopped, the system might lose network connectivity. If <code>ssh</code> is stopped, remote users will be unable to log into the system.<br><br><hr><br><br><h2>Part E: Shell Scripting</h2><br><br>Here is the code for the <code>system_report.sh</code> script requested in the assignment.<br><br>### <code>system_report.sh</code><br><br><pre><code>#!/bin/bash<br><br>echo "==============================="
+echo "        SYSTEM REPORT          "
+echo "==============================="<br><br><h1>Display Current User</h1>
+echo "Current User : $(whoami)"<br><br><h1>Display Hostname</h1>
+echo "Hostname     : $(hostname)"<br><br><h1>Display Date & Time</h1>
+echo "Date & Time  : $(date)"<br><br>echo "==============================="
+</code></pre><br><br>### How to use it:
+1. Create the file: <code>nano system_report.sh</code>
+2. Paste the code above into the file and save it.
+3. Make it executable: <code>chmod +x system_report.sh</code>
+4. Run the script: <code>./system_report.sh</code>
+
+</body>
+</html>
